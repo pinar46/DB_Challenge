@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class CsvBetriebsstellenService {
         setting.setHeaderExtractionEnabled(true);
         setting.setDelimiterDetectionEnabled(true);
         CsvParser parser = new CsvParser(setting);
-        List<Record> parseAllRecords = parser.parseAllRecords(inputStream);
+        List<Record> parseAllRecords = parser.parseAllRecords(inputStream, StandardCharsets.UTF_8);
         parseAllRecords.forEach(record -> {
             Betriebsstelle betriebsstelle = new Betriebsstelle();
             betriebsstelle.setAbk(record.getString("Abk"));
